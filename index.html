@@ -13,114 +13,496 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             font-family: Tahoma, Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
-        }
-
-        header {
-            background: #111827;
             color: white;
-            text-align: center;
-            padding: 60px 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(5, 8, 20, 0.62),
+                    rgba(5, 8, 20, 0.78)
+                ),
+                url("https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=2000&q=85");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        header h1 {
-            font-size: 38px;
-            margin-bottom: 15px;
+
+        /* ---------- MENU BUTTON ---------- */
+
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.3);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: 5px;
+
+            cursor: pointer;
+
+            z-index: 1000;
+
+            transition: 0.3s ease;
         }
 
-        header p {
-            font-size: 20px;
-            color: #d1d5db;
+        .menu-button:hover {
+            transform: scale(1.08) rotate(3deg);
+            background: rgba(255,255,255,0.22);
         }
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 40px 20px;
-        }
+        .menu-button span {
+            width: 24px;
+            height: 2px;
 
-        .intro {
             background: white;
-            padding: 30px;
+
             border-radius: 20px;
-            margin-bottom: 35px;
-            text-align: center;
-        }
 
-        .intro h2 {
-            font-size: 28px;
-        }
-
-        .intro p {
-            font-size: 18px;
-            line-height: 2;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+
+        /* ---------- SIDE MENU ---------- */
+
+        .menu {
+            position: fixed;
+
+            top: 0;
+            right: -320px;
+
+            width: 300px;
+            height: 100vh;
+
+            padding: 100px 25px 30px;
+
+            background: rgba(10, 15, 30, 0.72);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            border-left: 1px solid rgba(255,255,255,0.2);
+
+            z-index: 999;
+
+            transition: 0.4s ease;
         }
 
+        .menu.active {
+            right: 0;
+        }
+
+        .menu h2 {
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: block;
+
+            color: white;
+            text-decoration: none;
+
+            padding: 16px 20px;
+            margin-bottom: 12px;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.09);
+
+            border: 1px solid rgba(255,255,255,0.14);
+
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
+        }
+
+
+        /* ---------- HEADER ---------- */
+
+        header {
+            min-height: 75vh;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 100px 20px 50px;
+        }
+
+        header h1 {
+            font-size: clamp(35px, 8vw, 70px);
+
+            margin: 0 0 20px;
+
+            text-shadow:
+                0 5px 30px rgba(0,0,0,0.6);
+
+            animation: fadeUp 1s ease;
+        }
+
+        header p {
+            font-size: clamp(17px, 4vw, 23px);
+
+            color: rgba(255,255,255,0.82);
+
+            animation: fadeUp 1.3s ease;
+        }
+
+
+        /* ---------- CONTAINER ---------- */
+
+        .container {
+            width: min(1100px, 92%);
+
+            margin: auto;
+
+            padding-bottom: 80px;
+        }
+
+
+        /* ---------- GLASS INTRO ---------- */
+
+        .intro {
+
+            position: relative;
+
+            padding: 35px;
+
+            margin-bottom: 35px;
+
+            border-radius: 35px;
+
+            overflow: hidden;
+
+            background: rgba(255,255,255,0.11);
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.25);
+
+            text-align: center;
+
+            animation: fadeUp 1.5s ease;
+        }
+
+        .intro::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            background: rgba(255,255,255,0.12);
+
+            filter: blur(50px);
+
+            border-radius: 50%;
+
+            top: -70px;
+            left: -70px;
+        }
+
+        .intro h2 {
+            font-size: 30px;
+        }
+
+        .intro p {
+            line-height: 2;
+            color: rgba(255,255,255,0.85);
+        }
+
+
+        /* ---------- PROJECT GRID ---------- */
+
+        .projects {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+
+            gap: 22px;
+        }
+
+
+        /* ---------- GLASS CARDS ---------- */
+
+        .card {
+
+            position: relative;
+
+            min-height: 230px;
+
+            padding: 30px;
+
+            border-radius: 38px;
+
+            overflow: hidden;
+
+            background: rgba(255,255,255,0.10);
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.25);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.35s ease,
+                background 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.12);
+
+            filter: blur(40px);
+
+            top: -40px;
+            right: -40px;
+
+            transition: 0.4s;
+        }
+
+        .card:hover {
+
+            transform:
+                translateY(-10px)
+                scale(1.015);
+
+            background: rgba(255,255,255,0.16);
+
+            box-shadow:
+                0 30px 70px rgba(0,0,0,0.4);
+        }
+
+        .card:hover::before {
+
+            transform: scale(1.8);
+
+            background:
+                rgba(255,255,255,0.18);
+        }
+
+        .card:active {
+
+            transform:
+                scale(0.97);
+        }
+
+
+        /* ---------- CARD TEXT ---------- */
+
         .number {
-            font-size: 18px;
-            color: #6b7280;
+
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.12);
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            font-size: 13px;
+
+            color: rgba(255,255,255,0.7);
         }
 
         .card h3 {
+
             font-size: 21px;
-            margin: 15px 0;
+
+            margin: 22px 0 14px;
         }
 
         .card p {
-            color: #555;
-            line-height: 1.8;
+
+            line-height: 1.9;
+
+            color: rgba(255,255,255,0.75);
+
+            font-size: 15px;
         }
+
+
+        /* ---------- FOOTER ---------- */
 
         footer {
+
             text-align: center;
-            background: #111827;
-            color: white;
-            padding: 25px;
-            margin-top: 40px;
+
+            padding: 40px 20px;
+
+            background: rgba(0,0,0,0.3);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border-top:
+                1px solid rgba(255,255,255,0.15);
         }
 
-        @media (max-width: 600px) {
 
-            header h1 {
-                font-size: 30px;
+        /* ---------- ANIMATION ---------- */
+
+        @keyframes fadeUp {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(30px);
             }
 
-            header p {
-                font-size: 17px;
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* ---------- MOBILE ---------- */
+
+        @media(max-width:600px) {
+
+            .menu-button {
+
+                width: 52px;
+                height: 52px;
+
+                top: 15px;
+                right: 15px;
+            }
+
+            header {
+
+                min-height: 65vh;
+
+                padding-top: 100px;
+            }
+
+            .intro {
+
+                padding: 25px;
+
+                border-radius: 30px;
+            }
+
+            .card {
+
+                border-radius: 32px;
+
+                min-height: 210px;
             }
 
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-<header>
 
-    <h1>🧠 انجمن هوشواره قاف</h1>
+<!-- MENU BUTTON -->
+
+<div class="menu-button" onclick="toggleMenu()">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+<!-- SIDE MENU -->
+
+<div class="menu" id="menu">
+
+    <h2>☰ منو</h2>
+
+    <a href="#home">
+        🏠 صفحه اصلی
+    </a>
+
+    <a href="#projects">
+        🚀 پروژه‌ها
+    </a>
+
+    <a href="#about">
+        👤 درباره من
+    </a>
+
+    <a href="#">
+        🔐 ورود مدیر
+    </a>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header id="home">
+
+    <h1>
+        🦅 انجمن هوشواره قاف
+    </h1>
 
     <p>
         ارائه‌ها و پروژه‌های سجاد عابدی
@@ -129,35 +511,42 @@
 </header>
 
 
+<!-- MAIN -->
+
 <div class="container">
 
-    <div class="intro">
 
-        <h2>سلام 👋</h2>
+    <section class="intro" id="about">
 
-        <p>
-            در این سایت، ارائه‌ها و پروژه‌هایی که در انجمن هوشواره قاف انجام داده‌ام
-            قرار گرفته‌اند.
-        </p>
+        <h2>
+            خوش آمدید 👋
+        </h2>
 
         <p>
-            این صفحه به مرور زمان تکمیل خواهد شد.
+            در این سایت مجموعه‌ای از ارائه‌ها،
+            پروژه‌ها و فعالیت‌هایی که در انجمن
+            هوشواره قاف انجام داده‌ام قرار گرفته است.
         </p>
 
-    </div>
+    </section>
 
 
-    <div class="projects">
+    <section class="projects" id="projects">
 
 
         <div class="card">
 
-            <div class="number">01</div>
+            <span class="number">
+                01
+            </span>
 
-            <h3>🔎 ارائه SEO و GEO</h3>
+            <h3>
+                🔎 ارائه SEO و GEO
+            </h3>
 
             <p>
-                ارائه و آشنایی با مفاهیم SEO و GEO و کاربرد آن‌ها در دنیای وب و هوش مصنوعی.
+                آشنایی با SEO و GEO و کاربرد
+                آن‌ها در دنیای وب و هوش مصنوعی.
             </p>
 
         </div>
@@ -165,12 +554,17 @@
 
         <div class="card">
 
-            <div class="number">02</div>
+            <span class="number">
+                02
+            </span>
 
-            <h3>🤖 ارائه ایجنت‌ها</h3>
+            <h3>
+                🤖 ارائه ایجنت‌ها
+            </h3>
 
             <p>
-                ارائه درباره ایجنت‌های هوش مصنوعی و نحوه استفاده از آن‌ها.
+                بررسی مفهوم ایجنت‌های هوش مصنوعی
+                و کاربردهای آن‌ها.
             </p>
 
         </div>
@@ -178,12 +572,17 @@
 
         <div class="card">
 
-            <div class="number">03</div>
+            <span class="number">
+                03
+            </span>
 
-            <h3>🎮 ساخت بازی با Claude</h3>
+            <h3>
+                🎮 ساخت بازی با Claude
+            </h3>
 
             <p>
-                ساخت و تجربه توسعه یک بازی با استفاده از هوش مصنوعی Claude.
+                تجربه ساخت یک بازی با کمک
+                هوش مصنوعی Claude.
             </p>
 
         </div>
@@ -191,12 +590,17 @@
 
         <div class="card">
 
-            <div class="number">04</div>
+            <span class="number">
+                04
+            </span>
 
-            <h3>📱 ساخت اپلیکیشن</h3>
+            <h3>
+                📱 ساخت اپلیکیشن
+            </h3>
 
             <p>
-                تجربه ساخت یک اپلیکیشن با کمک ابزارها و فناوری‌های هوش مصنوعی.
+                تجربه ساخت اپلیکیشن با کمک
+                ابزارهای هوش مصنوعی.
             </p>
 
         </div>
@@ -204,12 +608,17 @@
 
         <div class="card">
 
-            <div class="number">05</div>
+            <span class="number">
+                05
+            </span>
 
-            <h3>💬 ساخت ربات تلگرامی</h3>
+            <h3>
+                💬 ساخت ربات تلگرامی
+            </h3>
 
             <p>
-                ساخت و توسعه یک ربات تلگرامی و آشنایی با روند ایجاد ربات.
+                ساخت و توسعه یک ربات تلگرامی
+                و آشنایی با روند ایجاد آن.
             </p>
 
         </div>
@@ -217,33 +626,49 @@
 
         <div class="card">
 
-            <div class="number">06</div>
+            <span class="number">
+                06
+            </span>
 
-            <h3>🌐 طراحی سایت با GitHub</h3>
+            <h3>
+                🌐 طراحی سایت با GitHub
+            </h3>
 
             <p>
-                ساخت و انتشار یک سایت رایگان با استفاده از GitHub Pages.
+                ساخت و انتشار یک سایت رایگان
+                با استفاده از GitHub Pages.
             </p>
 
         </div>
 
 
-    </div>
+    </section>
 
 </div>
 
 
 <footer>
 
-    <p>
-        ساخته شده توسط سجاد عابدی
-    </p>
-
-    <p>
-        انجمن هوشواره قاف
-    </p>
+    ساخته شده توسط سجاد عابدی
+    <br>
+    انجمن هوشواره قاف
 
 </footer>
+
+
+<script>
+
+    function toggleMenu() {
+
+        const menu =
+            document.getElementById("menu");
+
+        menu.classList.toggle("active");
+
+    }
+
+</script>
+
 
 </body>
 
